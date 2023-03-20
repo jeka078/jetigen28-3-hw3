@@ -1,54 +1,70 @@
-class Bank:
+class Bank():
     def __init__(self, name, balanse):
-        self._name = name
-        self._balanse = balanse
+        self.name = name
+        self.balanse = balanse
 
     def moneyX(self):
-        ad = input(f'сколько добавишь к своим {self._balanse} введи сумму: ')
-        print(self._balanse + int(ad))
+        add = int(input('Введите сумму которую хотите добавить на свой счёт: '))
+        self.balanse += add
+        print(f'Счёт пополнен на: {self.balanse}')
 
-    def _kill(self):
-        if self._balanse > 0:
-            print('теперь у тебя все наличкой')
-            return self._balanse - self._balanse
-        else:
-            print('ты и так бомж, на счету нету денег')
-            return self._balanse
+    def kill(self):
+        return self.balanse == int(0)
 
     def __jackpot(self):
-        self._balanse *= 10
+        self.balanse *= 10
 
-    def get_jeckp(self):
-        print(self.__jackpot())
+    def __str__(self):
+        return f'Имя: {self.name}\n' \
+               f'Баланс: {self.balanse}'
 
+    def __unite_balanse(self, other):
+        self.balanse += other.balanse
+
+
+me = Bank(name="Daniel", balanse=100)
+you = Bank(name="Eldar", balanse=100)
+
+me._Bank__unite_balanse(you)
+
+print(me.balanse)
+print(you.balanse)
+
+
+
+
+class Gs(Bank):
+    def __init__(self, name, balanse):
+        super().__init__(name, balanse)
+
+    def get_name(self):
+        return self._name
+
+    def set_name(self,name):
+        self._name = name
+
+    def get_balanse(self):
+        return self._balanse
+
+    def set_balanse(self, balanse):
+        self._balanse = balanse
+
+
+class Property(Bank):
+    def __init__(self, name, balanse):
+        super().__init__(name, balanse)
 
     @property
-    def name(self):
-        return f'{self.__name}'
-
-    @name.setter
-    def name(self, a):
-        self.__name = a
-
+    def gotname(self):
+        return f'I\'m {self.name}'
 
     @property
-    def balanse(self):
-        return f'{self._balanse}'
+    def gotbalanse(self):
+        return f'balanse: {self.balanse}'
 
-    @balanse.setter
-    def balanse(self,b):
-        self.balanse = b
-    def _copyy(self, other):
-        print(f'ваш сложенный баланс {self._balanse + other._balanse}\n'
-              f'было{self._balanse}')
-
-
-
-
-bank = Bank('mbank', 20)
-load = Bank('optima', 100)
-bank.moneyX()
-print(bank._kill())
-bank._copyy(load)
-print(Bank.get_jeckp(load))
-bank.get_jeckp()
+a = Property("Victor", 200)
+b = Gs("igor", 100)
+print(a.gotbalanse)
+print(a.gotname)
+print(b.kill())
+print(b.set_balanse(120))
